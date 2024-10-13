@@ -1,5 +1,6 @@
 # bliend_sqli
-Bliend SQL Injcetion Attack Python Code
+Bliend SQL Injcetion Attack Python Code.
+
 Bliend SQL Injection 공격을 실행하는 코드입니다.
 
 ## 사용법
