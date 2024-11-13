@@ -25,6 +25,7 @@ sel.add_argument("-e", "--ender", help = "닫는 SQL문. 초기값 #", default =
 sel.add_argument("-ck", "--cookie", help = "쿠키값 지정.")
 sel.add_argument("-m", "--method", help = "HTTP 메서드 지정. (G)/P", default = "G")
 sel.add_argument("-l", "--lim", help = "데이터 갯수 제한")
+sel.add_argument("-p", "--para", help = "파라미터 값 지정", nargs = "+", default = [])
 
 
 
@@ -42,7 +43,7 @@ print(args)
 
 
 
-bsqli = Bliend_sqli(args.url, args.query, args.signature, sql_starter = args.starter, sql_ender = args.ender, cookie = cookie, req = args.method)
+bsqli = Bliend_sqli(args.url, args.query, args.signature, sql_starter = args.starter, sql_ender = args.ender, cookie = cookie, req = args.method, para = args.para)
 #, cookie = cookie, req = args.method
 
 if args.execution == "db":
@@ -55,6 +56,8 @@ elif args.execution == "column":
 elif args.execution == "data":
     data = bsqli.db_data_func(args.table, args.column, args.database, args.lim)
     print(data)
+else:
+    print("올바른 execution 값을 입력해주세요.")
 
 
 #######################
