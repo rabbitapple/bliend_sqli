@@ -15,7 +15,7 @@ sel.add_argument("-d", "--database", help = "데이터베이스명 지정. 초�
 req.add_argument("-t", "--table", help = "테이블명 지정", nargs = "+")
 sel.add_argument("-c", "--column", help = "컬럼명 지정", nargs = "+")
 
-req.add_argument("execution", help = "실행할 옵션(db, table, column, data)")
+req.add_argument("execution", help = "실행할 옵션(db, table, column, data, db_all_name)")
 req.add_argument("-u", "--url", help = "URL 주소", required = True)
 req.add_argument("-q", "--query", help = "URL 쿼리 파라미터", required = True)
 req.add_argument("-sign", "--signature", help = "True의 시그니처 지정", required = True)
@@ -57,6 +57,9 @@ elif args.execution == "column":
 elif args.execution == "data":
     data = bsqli.db_data_func(args.table, args.column, args.database, args.lim)
     print(data)
+elif args.execution == "db_all":
+    db = bsqli.db_all_name()
+    print(db)
 else:
     print("올바른 execution 값을 입력해주세요.")
 
